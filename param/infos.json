@@ -1,0 +1,8 @@
+{
+    "name" : "Lucene",
+    "description" : "Permet la recherche sur les pages et les billets de blog du site",
+    "author" : "Michael Alves Lobo",
+    "authorEmail" : "alveslobo.michael@gmail.com",
+    "authorWebsite" : "http://kairel.fr",
+    "version" : "1.0"
+}
