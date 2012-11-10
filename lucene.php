@@ -1,17 +1,21 @@
 <?php
 if(!defined('ROOT')) die();
 
-
+$lucene = new lucene();
 ###### Installation
 function luceneInstall() {}
 ###### code du plugin
 
+function luceneDisplayfield(){
+    global $lucene;
+    $output = $lucene->getField();
+    return $output;
+}
 /*
 ** prechauffage
 */
 define('LUCENE_DATAPATH', ROOT.'data/plugin/lucene/');
 define('LUCENE_PLUGINPATH', ROOT.'plugin/lucene/');
-$lucene = new lucene();
 
 class lucene{
     /**
@@ -61,6 +65,7 @@ class lucene{
         } 
         return false;
     }
+
     /*
      * Retourne le html du champs de recherche
      * @param $baliseO Balise ouvrante à intégrer a la div de recherche
@@ -68,8 +73,7 @@ class lucene{
      */
     static function getField ($baliseO = "", $balisesF = ""){
         if (self::isActive()){
-            return $baliseO.'<h2>Rechercher</h2>
-                    <div id = "lucene">
+            return $baliseO.'<div id = "lucene">
                     <form id="searchform" method="GET" action="?p=lucene">
                     <input type = "hidden" name ="p" value = "lucene">
 		    <input type="text" value="" name="searchValue" id="searchfield"><input type="hidden" id="searchsubmit" value="Search">
@@ -116,5 +120,4 @@ class lucene{
         return array_merge($this->_scanDir('page' , $search) , $this->_scanDir('blog' , $search));
     } 
 }
-
 ?>
