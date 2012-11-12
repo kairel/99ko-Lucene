@@ -76,7 +76,7 @@ class lucene{
             return $baliseO.'<div id = "lucene">
                     <form id="searchform" method="GET" action="?p=lucene">
                     <input type = "hidden" name ="p" value = "lucene">
-		    <input type="text" value="" name="searchValue" id="searchfield"><input type="hidden" id="searchsubmit" value="Search">
+		    <input type="text" value="" name="searchValue" id="searchfield" placeholder="Recherche"><input type="hidden" id="searchsubmit" value="Search">
 		    </form>
                     </div>'.$baliseF;
         }
