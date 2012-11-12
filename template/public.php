@@ -1,7 +1,8 @@
 <?php
 if(!defined('ROOT')) die();
 
-
+$runPlugin->setMainTitle('');
+$runPlugin->initBreadcrumb();
 ?>
 
 <?php include_once(ROOT.'theme/'.$coreConf['theme'].'/header.php') ?>
