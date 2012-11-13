@@ -21,6 +21,7 @@ switch(ACTION){
         $runPlugin->setConfigVal('sidebarCallFunction', '');
         $runPlugin->setConfigVal('sidebarTitle', '');
       }
+      $runPlugin->setConfigVal('titleTag',$_POST['titleTag']);
       $pluginsManager->savePluginConfig($runPlugin);
       $lucene->save();
 	break;

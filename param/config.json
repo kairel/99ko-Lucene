@@ -2,5 +2,6 @@
     "priority" : "2",
     "activate" : "1",
     "sidebarTitle" : "Recherche",
-    "sidebarCallFunction" : "luceneDisplayField"
+    "sidebarCallFunction" : "luceneDisplayField",
+    "titleTag" : ""
 }

@@ -3,6 +3,7 @@ if(!defined('ROOT')) die();
 
 $runPlugin->setMainTitle('');
 $runPlugin->initBreadcrumb();
+$runPlugin->setTitleTag($runPlugin->getConfigVal('titleTag'));
 ?>
 
 <?php include_once(ROOT.'theme/'.$coreConf['theme'].'/header.php') ?>
@@ -20,7 +21,7 @@ foreach($lucene->search(strtoupper(htmlentities(utf8_decode(urldecode($_GET['sea
     $nb_result++;
 }
 if ($nb_result > 0){
-	$result_html = "<p id = 'search_text'>".$nb_result." r&#233;sultat(s) &#225; votre recherche</p>";
+	$result_html = "<p id = 'search_text'>".$nb_result." r&#233;sultat(s) &#224; votre recherche</p>";
 }
 else {
 	$result_html = "<p id = 'search_text'>Aucun r&#233;sultat.</p>";

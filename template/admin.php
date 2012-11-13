@@ -26,6 +26,8 @@ $lucene = new lucene();
       $html .= "<input type='checkbox' name = 'activeSidebar' checked />";
     }
 
+    $html .= "</td></tr>";
+    $html .= "<tr><td>Balise Title des résultats de recherche</td><td><input type='text' value='".$runPlugin->getConfigVal('titleTag') ."' name='titleTag' /></td></tr>";
     $html .= "</td></tr></table>
              <p><input type='submit' value='Enregistrer' /></p>
          ";
