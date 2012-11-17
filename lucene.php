@@ -89,15 +89,22 @@ class lucene{
      * @param string $dirname nom du repertoire
      */
     protected function _scanDir($dirname , $search){
-        $data = array();
+        $data = $dataObject = array();
         if (is_dir(ROOT.'data/plugin/'.$dirname)){ 
             $dir = opendir(ROOT.'data/plugin/'.$dirname);
             $output = '';
             while($file = readdir($dir)) {
                 if($file != '.' && $file != '..' && !is_dir(ROOT.'data/plugin/'.$dirname.'/'.$file) && $file != 'categories.json' && $file !='config.txt' && $file != 'index.json'){
                     $object = json_decode(@file_get_contents(ROOT.'data/plugin/'.$dirname.'/'.$file));
-                    //Ne recherche que dans les contenus publiés ou visibles
-                    if (($dirname == 'blog' && $object->published == 'on') || ($dirname == 'page' && $object->isHidden == '0')){
+                    if (!is_array($object)){
+                        $dataObject[] = $object;
+                    }
+                    else {
+                        $dataObject = $object;
+                        unset($object);
+                    }
+                    foreach ($dataObject as $key => $object){
+                      if (($dirname == 'blog' && $object->published == 'on') || ($dirname == 'page' && $object->isHidden == '0') || ($dirname == 'news')){
                         //Si correspond au pattern
                         if (preg_match('/'.$search.'/',@strtoupper($object->title)) || preg_match('/'.$search.'/' ,strtoupper($object->content)) || preg_match('/'.$search.'/' ,@strtoupper($object->name)) ){
                             if (isset($object->title) && !empty($object->title)){
@@ -106,9 +113,15 @@ class lucene{
                             else {   
                                 $data[$object->id]['title'] = $object->name;
                             }
-                            $data[$object->id]['content'] = $object->content;
-                            $data[$object->id]['href'] = '?p='.$dirname.'&id='.$object->id;
+                            if ($dirname == 'news'){
+                              $data[$object->id]['href']  = "?p=news&action=read&name=".$object->name."&id=".$object->id;
+                            }
+                            else {
+                              $data[$object->id]['content'] = $object->content;
+                              $data[$object->id]['href'] = '?p='.$dirname.'&id='.$object->id;
+                            }
                         }
+                      }
                     }
                 }
             }
@@ -117,7 +130,7 @@ class lucene{
         return $data;
     }
     public function search ($search){
-        return array_merge($this->_scanDir('page' , $search) , $this->_scanDir('blog' , $search));
+        return array_merge($this->_scanDir('page' , $search) , $this->_scanDir('blog' , $search),$this->_scanDir('news' , $search));
     } 
 }
 ?>
